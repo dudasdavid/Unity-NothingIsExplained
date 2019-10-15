@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour
     private Vector3 offset;            //Private variable to store the offset distance between the player and camera
     private Vector3 userVector;
     private float userXPrev;
+    private float originalUserVectorY;
 
     private Vector2 screenSize;
     private Vector3 cameraPos;
@@ -23,6 +24,9 @@ public class CameraController : MonoBehaviour
     public float zPosition = 0f;
 
     public float bottomOffset;
+    public float topOffset;
+
+    public bool followCameraY;
 
 
     // Use this for initialization
@@ -33,6 +37,7 @@ public class CameraController : MonoBehaviour
         offset.y += yOffset;
         userVector = Player.transform.position;
         userXPrev = userVector.x;
+        originalUserVectorY = userVector.y;
 
 
         //Generate our empty objects
@@ -54,7 +59,7 @@ public class CameraController : MonoBehaviour
         leftCollider.gameObject.AddComponent<BoxCollider2D>();
 
         //Make them the child of whatever object this script is on, preferably on the Camera so the objects move with the camera without extra scripting
-        topCollider.parent = transform;
+        //topCollider.parent = transform;
         bottomCollider.parent = transform;
         rightCollider.parent = transform;
         leftCollider.parent = transform;
@@ -70,7 +75,7 @@ public class CameraController : MonoBehaviour
         leftCollider.localScale = new Vector3(colDepth, screenSize.y * 2, colDepth);
         leftCollider.position = new Vector3(cameraPos.x - screenSize.x - (leftCollider.localScale.x * 0.5f), cameraPos.y, zPosition);
         topCollider.localScale = new Vector3(screenSize.x * 2, colDepth, colDepth);
-        topCollider.position = new Vector3(cameraPos.x, cameraPos.y + screenSize.y + (topCollider.localScale.y * 0.5f), zPosition);
+        topCollider.position = new Vector3(cameraPos.x, cameraPos.y + screenSize.y + (topCollider.localScale.y * 0.5f) + topOffset, zPosition);
         bottomCollider.localScale = new Vector3(screenSize.x * 2, colDepth, colDepth);
         bottomCollider.position = new Vector3(cameraPos.x, cameraPos.y - screenSize.y - (bottomCollider.localScale.y * 0.5f) - bottomOffset, zPosition);
     }
@@ -82,7 +87,16 @@ public class CameraController : MonoBehaviour
         //transform.position = Player.transform.position + offset;
         userVector.x = Player.transform.position.x;
 
-        if (userVector.x > userXPrev)
+        if (followCameraY)
+        {
+            userVector.y = Player.transform.position.y + 3;
+        }
+        else
+        {
+            userVector.y = originalUserVectorY;
+        }
+
+        if (userVector.x > userXPrev || followCameraY)
         {
             transform.position = userVector + offset;
             userXPrev = userVector.x;
@@ -100,6 +114,8 @@ public class CameraController : MonoBehaviour
         //Change our scale and positions to match the edges of the screen...   
         leftCollider.localScale = new Vector3(colDepth, screenSize.y * 2, colDepth);
         leftCollider.position = new Vector3(cameraPos.x - screenSize.x - (leftCollider.localScale.x * 0.5f), cameraPos.y, zPosition);
+
+        Debug.Log(topCollider.position);
 
     }
 

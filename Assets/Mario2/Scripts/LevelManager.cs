@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour {
 	private PlayerControl mario;
 	private Animator mario_Animator;
 	private Rigidbody2D mario_Rigidbody2D;
+    private CameraController camCtrl;
 
 	public Text scoreText;
 	public Text coinText;
@@ -94,8 +95,10 @@ public class LevelManager : MonoBehaviour {
         mario_Rigidbody2D = mario.gameObject.GetComponent<Rigidbody2D> ();
 		mario.UpdateSize ();
 
-		// Sound volume
-		musicSource.volume = PlayerPrefs.GetFloat("musicVolume");
+        camCtrl = FindObjectOfType<CameraController>();
+
+        // Sound volume
+        musicSource.volume = PlayerPrefs.GetFloat("musicVolume");
 		soundSource.volume = PlayerPrefs.GetFloat("soundVolume");
 		pauseSoundSource.volume = PlayerPrefs.GetFloat("soundVolume");
 
@@ -159,51 +162,6 @@ public class LevelManager : MonoBehaviour {
 	List<Animator> unscaledAnimators = new List<Animator> ();
 	float pauseGamePrevTimeScale;
 	bool pausePrevMusicPaused;
-
-	IEnumerator PauseGameCo() {
-		gamePaused = true;
-		pauseGamePrevTimeScale = Time.timeScale;
-
-		Time.timeScale = 0;
-		pausePrevMusicPaused = musicPaused;
-		musicSource.Pause ();
-		musicPaused = true;
-		soundSource.Pause ();
-
-		// Set any active animators that use unscaled time mode to normal
-		unscaledAnimators.Clear();
-		foreach (Animator animator in FindObjectsOfType<Animator>()) {
-			if (animator.updateMode == AnimatorUpdateMode.UnscaledTime) {
-				unscaledAnimators.Add (animator);
-				animator.updateMode = AnimatorUpdateMode.Normal;
-			}
-		}
-
-		pauseSoundSource.Play();
-		yield return new WaitForSecondsRealtime (pauseSoundSource.clip.length);
-		Debug.Log (this.name + " PauseGameCo stops: records prevTimeScale=" + pauseGamePrevTimeScale.ToString());
-	}
-
-	IEnumerator UnpauseGameCo() {
-		pauseSoundSource.Play();
-		yield return new WaitForSecondsRealtime (pauseSoundSource.clip.length);
-
-		musicPaused = pausePrevMusicPaused;
-		if (!musicPaused) {
-			musicSource.UnPause ();
-		}
-		soundSource.UnPause ();
-
-		// Reset animators
-		foreach (Animator animator in unscaledAnimators) {
-			animator.updateMode = AnimatorUpdateMode.UnscaledTime;
-		}
-		unscaledAnimators.Clear ();
-
-		Time.timeScale = pauseGamePrevTimeScale;
-		gamePaused = false;
-		Debug.Log (this.name + " UnpauseGameCo stops: resume prevTimeScale=" + pauseGamePrevTimeScale.ToString());
-	}
 
 
 	/****************** Invincibility */
@@ -293,6 +251,7 @@ public class LevelManager : MonoBehaviour {
         mario.invertGravity = true;
         mario.jumpVelocity = 3;
         mario.doubleJumpVelocity = 2;
+        camCtrl.followCameraY = true;
     }
 
     public void MarioNormalGravity()
@@ -302,6 +261,7 @@ public class LevelManager : MonoBehaviour {
         mario.invertGravity = false;
         mario.jumpVelocity = 8.5f;
         mario.doubleJumpVelocity = 6;
+        camCtrl.followCameraY = false;
     }
 
     public void MarioSmallButFast()
