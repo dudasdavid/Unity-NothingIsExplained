@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class jump : MonoBehaviour
+public class PlayerControl : MonoBehaviour
 {
     public float gravityFall;
     public float velocity;
@@ -22,6 +22,8 @@ public class jump : MonoBehaviour
     private bool isJumping;
     private bool isCrouching;
 
+    public bool isDoubleJumpEnabled;
+
     private Animator m_Animator;
     private SpriteRenderer spriteRenderer;
 
@@ -35,16 +37,16 @@ public class jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow ) || Input.GetKeyDown(KeyCode.Space))
         {
             jumpFlag = 1;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             forwardFlag = 1;
             backwardFlag = 0;
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             forwardFlag = 0;
             backwardFlag = 1;
@@ -54,7 +56,7 @@ public class jump : MonoBehaviour
             forwardFlag = 0;
             backwardFlag = 0;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             duckFlag = 1;
             forwardFlag = 0;
@@ -63,6 +65,7 @@ public class jump : MonoBehaviour
         else
         {
             duckFlag = 0;
+
         }
     }
 
@@ -80,7 +83,7 @@ public class jump : MonoBehaviour
             {
                 velocityVector2D.y = jumpVelocity;//rigidBody.velocity.y + jumpVelocity;
             }
-            else if (jumpCount == 2)
+            else if (jumpCount == 2 && isDoubleJumpEnabled)
             {
                 velocityVector2D.y = doubleJumpVelocity;// rigidBody.velocity.y + jumpVelocity;
             }
@@ -103,8 +106,6 @@ public class jump : MonoBehaviour
 
         if (forwardFlag == 1)
         {
-            //rigidBody.MovePosition(rigidBody.position + Vector2.right*Time.fixedDeltaTime * velocity);
-            //rigidBody.velocity = new Vector2(velocity, rigidBody.velocity.y);
             if (velocityVector2D.x <= velocity)
             {
                 velocityVector2D.x += velocityIncrement;
@@ -113,13 +114,19 @@ public class jump : MonoBehaviour
             {
                 velocityVector2D.x = velocity;
             }
+
+            if (velocityVector2D.x < 0)
+            {
+                m_Animator.SetBool("isSkidding", true);
+            }
+            else
+            {
+                m_Animator.SetBool("isSkidding", false);
+            }
             
-            //forwardFlag = 0;
         }
         else if (backwardFlag == 1)
         {
-            //rigidBody.velocity = new Vector2(-velocity, rigidBody.velocity.y);
-            //velocityVector2D.x = -velocity;
             if (velocityVector2D.x >= -velocity)
             {
                 velocityVector2D.x -= velocityIncrement;
@@ -129,7 +136,15 @@ public class jump : MonoBehaviour
                 velocityVector2D.x = -velocity;
             }
 
-            //backwardFlag = 0;
+
+            if (velocityVector2D.x > 0)
+            {
+                m_Animator.SetBool("isSkidding", true);
+            }
+            else
+            {
+                m_Animator.SetBool("isSkidding", false);
+            }
         }
         else
         {
@@ -152,14 +167,14 @@ public class jump : MonoBehaviour
             spriteRenderer.flipX = false;
         }
 
-        if (Mathf.Abs(velocityVector2D.x) > 0.3)
+        if (Mathf.Abs(velocityVector2D.x) > 0.5)
         {
             m_Animator.SetFloat("absSpeed", Mathf.Abs(velocityVector2D.x));
         }
         else
         {
             m_Animator.SetFloat("absSpeed", 0f);
-            //m_Animator.SetBool("isSkidding", false);
+            m_Animator.SetBool("isSkidding", false);
         }
         
         //rigidBody.rotation = 0f;
@@ -175,6 +190,11 @@ public class jump : MonoBehaviour
             isJumping = false;
             //Debug.Log("Touch ground");
         }
+    }
+
+    public void UpdateSize()
+    {
+        GetComponentInChildren<Animator>().SetInteger("marioSize", FindObjectOfType<LevelManager>().marioSize);
     }
 
 }

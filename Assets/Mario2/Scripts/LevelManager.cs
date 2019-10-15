@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour {
 	private float transformDuration = 1;
 
 	private GameStateManager t_GameStateManager;
-	private Mario mario;
+	private PlayerControl mario;
 	private Animator mario_Animator;
 	private Rigidbody2D mario_Rigidbody2D;
 
@@ -86,11 +86,12 @@ public class LevelManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		t_GameStateManager = FindObjectOfType<GameStateManager>();
-		RetrieveGameState ();
+		//RetrieveGameState ();
 
-		mario = FindObjectOfType<Mario> ();
-		mario_Animator = mario.gameObject.GetComponent<Animator> ();
-		mario_Rigidbody2D = mario.gameObject.GetComponent<Rigidbody2D> ();
+		mario = FindObjectOfType<PlayerControl> ();
+		mario_Animator = mario.gameObject.GetComponentInChildren<Animator> ();
+        
+        mario_Rigidbody2D = mario.gameObject.GetComponent<Rigidbody2D> ();
 		mario.UpdateSize ();
 
 		// Sound volume
@@ -142,13 +143,14 @@ public class LevelManager : MonoBehaviour {
 			MarioRespawn (true);
 		}
 
-		if (Input.GetButtonDown ("Pause")) {
+		/*if (Input.GetButtonDown ("Pause")) {
 			if (!gamePaused) {
 				StartCoroutine (PauseGameCo ());
 			} else {
 				StartCoroutine (UnpauseGameCo ());
 			}
 		}
+        */
 
 	}
 
@@ -255,11 +257,12 @@ public class LevelManager : MonoBehaviour {
 		if (marioSize < 2) {
 			StartCoroutine (MarioPowerUpCo ());
 		}
-		AddScore (powerupBonus, mario.transform.position);
+		//AddScore (powerupBonus, mario.transform.position);
 	}
 
 	IEnumerator MarioPowerUpCo() {
-		mario_Animator.SetBool ("isPoweringUp", true);
+        Debug.Log(mario_Animator);
+        mario_Animator.SetBool ("isPoweringUp", true);
 		Time.timeScale = 0f;
 		mario_Animator.updateMode = AnimatorUpdateMode.UnscaledTime;
 
@@ -272,7 +275,10 @@ public class LevelManager : MonoBehaviour {
 		marioSize++;
 		mario.UpdateSize ();
 		mario_Animator.SetBool ("isPoweringUp", false);
-	}
+
+        mario.isDoubleJumpEnabled = true;
+
+    }
 
 	public void MarioPowerDown() {
 		if (!isPoweringDown) {
@@ -322,7 +328,7 @@ public class LevelManager : MonoBehaviour {
 			soundSource.PlayOneShot (deadSound);
 
 			Time.timeScale = 0f;
-			mario.FreezeAndDie ();
+			//mario.FreezeAndDie ();
 
 			if (timeup) {
 				Debug.Log(this.name + " MarioRespawn: called due to timeup");
@@ -439,7 +445,7 @@ public class LevelManager : MonoBehaviour {
 		if (scores > currentHighScore) {
 			PlayerPrefs.SetInt ("highScore", scores);
 		}
-		t_GameStateManager.timeup = timeup;
+		//t_GameStateManager.timeup = timeup;
 		LoadSceneDelay ("Game Over Screen", delay);
 	}
 
@@ -585,7 +591,7 @@ public class LevelManager : MonoBehaviour {
 		timerPaused = true;
 		ChangeMusic (castleCompleteMusic);
 		musicSource.loop = false;
-		mario.AutomaticWalk(mario.castleWalkSpeedX);
+		//mario.AutomaticWalk(mario.castleWalkSpeedX);
 	}
 
 	public void MarioCompleteLevel() {
@@ -597,6 +603,6 @@ public class LevelManager : MonoBehaviour {
 	public void MarioReachFlagPole() {
 		timerPaused = true;
 		PauseMusicPlaySound (flagpoleSound, false);
-		mario.ClimbFlagPole ();
+		//mario.ClimbFlagPole ();
 	}
 }

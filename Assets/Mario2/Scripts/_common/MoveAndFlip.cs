@@ -20,7 +20,7 @@ public class MoveAndFlip : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
-		mario = FindObjectOfType<Mario> ().gameObject;
+		mario = FindObjectOfType<PlayerControl> ().gameObject;
 		OrientSprite ();
 	}
 
