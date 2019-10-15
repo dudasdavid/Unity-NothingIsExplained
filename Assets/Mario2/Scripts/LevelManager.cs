@@ -280,7 +280,40 @@ public class LevelManager : MonoBehaviour {
 
     }
 
-	public void MarioPowerDown() {
+    public void MarioDies()
+    {
+        soundSource.PlayOneShot(powerupSound); // should play sound regardless of size
+        //AddScore (powerupBonus, mario.transform.position);
+    }
+
+    public void MarioInvertGravity()
+    {
+        soundSource.PlayOneShot(powerupSound); // should play sound regardless of size
+        //AddScore (powerupBonus, mario.transform.position);
+        mario.invertGravity = true;
+        mario.jumpVelocity = 3;
+        mario.doubleJumpVelocity = 2;
+    }
+
+    public void MarioNormalGravity()
+    {
+        soundSource.PlayOneShot(powerupSound); // should play sound regardless of size
+        //AddScore (powerupBonus, mario.transform.position);
+        mario.invertGravity = false;
+        mario.jumpVelocity = 8.5f;
+        mario.doubleJumpVelocity = 6;
+    }
+
+    public void MarioSmallButFast()
+    {
+        MarioPowerDown();
+        mario.isDoubleJumpEnabled = false;
+        mario.velocity = 10;
+    }
+
+
+
+    public void MarioPowerDown() {
 		if (!isPoweringDown) {
 			Debug.Log (this.name + " MarioPowerDown: called and executed");
 			isPoweringDown = true;

@@ -23,6 +23,7 @@ public class PlayerControl : MonoBehaviour
     private bool isCrouching;
 
     public bool isDoubleJumpEnabled;
+    public bool invertGravity;
 
     private Animator m_Animator;
     private SpriteRenderer spriteRenderer;
@@ -72,7 +73,19 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rigidBody.gravityScale = rigidBody.velocity.y > 0 ? 1f : gravityFall;
+        
+
+        if (invertGravity)
+        {
+            rigidBody.gravityScale = rigidBody.velocity.y < 0 ? 1f : gravityFall;
+            rigidBody.gravityScale *= -1;
+            spriteRenderer.flipY = true;
+        }
+        else
+        {
+            rigidBody.gravityScale = rigidBody.velocity.y > 0 ? 1f : gravityFall;
+            spriteRenderer.flipY = false;
+        }
 
         velocityVector2D.y = rigidBody.velocity.y;
         if (jumpFlag == 1)
@@ -81,11 +94,26 @@ public class PlayerControl : MonoBehaviour
             jumpCount++;
             if (jumpCount == 1)
             {
-                velocityVector2D.y = jumpVelocity;//rigidBody.velocity.y + jumpVelocity;
+                if (invertGravity)
+                {
+                    velocityVector2D.y = -jumpVelocity;//rigidBody.velocity.y + jumpVelocity;
+                }
+                else
+                {
+                    velocityVector2D.y = jumpVelocity;//rigidBody.velocity.y + jumpVelocity;
+                }
+                   
             }
             else if (jumpCount == 2 && isDoubleJumpEnabled)
             {
-                velocityVector2D.y = doubleJumpVelocity;// rigidBody.velocity.y + jumpVelocity;
+                if (invertGravity)
+                {
+                    velocityVector2D.y = -doubleJumpVelocity;//rigidBody.velocity.y + jumpVelocity;
+                }
+                else
+                {
+                    velocityVector2D.y = doubleJumpVelocity;//rigidBody.velocity.y + jumpVelocity;
+                }
             }
 
             isJumping = true;
@@ -184,11 +212,23 @@ public class PlayerControl : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         //Debug.Log("OnCollisionEnter2D");
-        if (col.gameObject.transform.position.y < rigidBody.transform.position.y)
+        if (invertGravity)
         {
-            jumpCount = 0;
-            isJumping = false;
-            //Debug.Log("Touch ground");
+            if (col.gameObject.transform.position.y > rigidBody.transform.position.y)
+            {
+                jumpCount = 0;
+                isJumping = false;
+                //Debug.Log("Touch ground");
+            }
+        }
+        else
+        {
+            if (col.gameObject.transform.position.y < rigidBody.transform.position.y)
+            {
+                jumpCount = 0;
+                isJumping = false;
+                //Debug.Log("Touch ground");
+            }
         }
     }
 

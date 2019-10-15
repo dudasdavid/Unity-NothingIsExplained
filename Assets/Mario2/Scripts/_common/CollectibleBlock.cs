@@ -13,6 +13,10 @@ public class CollectibleBlock : MonoBehaviour {
 
 	public bool isPowerupBlock;
     public bool isSelfDestroy;
+    public bool isInvertGravity;
+    public bool isSmallButFast;
+
+
     public GameObject objectToSpawn;
 	public GameObject bigMushroom;
 	public GameObject fireFlower;
@@ -60,7 +64,16 @@ public class CollectibleBlock : MonoBehaviour {
                     }
                     if (isSelfDestroy)
                     {
+                        t_LevelManager.MarioDies();
+                    }
+                    if (isInvertGravity)
+                    {
+                        t_LevelManager.MarioInvertGravity();
                         
+                    }
+                    if (isSmallButFast)
+                    {
+                        t_LevelManager.MarioSmallButFast();
                     }
 
                     //Instantiate (objectToSpawn, transform.position + spawnPositionOffset, Quaternion.identity);
@@ -69,8 +82,14 @@ public class CollectibleBlock : MonoBehaviour {
 					if (timesToSpawn == 0) {
 						m_Animator.SetTrigger ("deactivated");
 						isActive = false;
-					}			
-				}
+					}
+                    if (isInvertGravity)
+                    {
+                        Destroy(gameObject);
+                    }
+
+                    
+                }
 			}
 
 			time1 = Time.time;
