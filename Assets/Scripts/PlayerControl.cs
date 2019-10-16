@@ -28,6 +28,7 @@ public class PlayerControl : MonoBehaviour
     private Animator m_Animator;
     private SpriteRenderer spriteRenderer;
     private CameraController camCtrl;
+    private LevelManager t_LevelManager;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class PlayerControl : MonoBehaviour
         m_Animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         camCtrl = FindObjectOfType<CameraController>();
+        t_LevelManager = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
@@ -69,6 +71,10 @@ public class PlayerControl : MonoBehaviour
         {
             duckFlag = 0;
 
+        }
+        if (Input.GetKey(KeyCode.R))
+        {
+            t_LevelManager.MarioRespawn();
         }
     }
 

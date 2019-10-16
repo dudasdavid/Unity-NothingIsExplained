@@ -203,6 +203,7 @@ public class LevelManager : MonoBehaviour
 
     public void MarioRespawn(bool timeup = false)
     {
+        Application.LoadLevel(Application.loadedLevel);
         if (!isRespawning)
         {
             isRespawning = true;
