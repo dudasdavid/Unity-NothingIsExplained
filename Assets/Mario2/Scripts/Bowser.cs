@@ -111,7 +111,7 @@ public class Bowser : Enemy {
 				new Vector2 (impostorInitialVelocity.x * directionX, impostorInitialVelocity.y);
 			t_LevelManager.soundSource.PlayOneShot (t_LevelManager.bowserFallSound);
 
-			t_LevelManager.AddScore (defeatBonus);
+			//t_LevelManager.AddScore (defeatBonus);
 			Destroy (gameObject);
 		}
 	}

@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
     {
         //Calculate and store the offset value by getting the distance between the player's position and camera's position.
         offset = transform.position - Player.transform.position;
-        offset.y += yOffset;
+        //offset.y += yOffset;
         userVector = Player.transform.position;
         userXPrev = userVector.x;
         originalUserVectorY = userVector.y;
@@ -89,11 +89,11 @@ public class CameraController : MonoBehaviour
 
         if (followCameraY)
         {
-            userVector.y = Player.transform.position.y + 3;
+            userVector.y = Player.transform.position.y+3;
         }
         else
         {
-            userVector.y = originalUserVectorY;
+            userVector.y = originalUserVectorY-yOffset;
         }
 
         if (userVector.x > userXPrev || followCameraY)

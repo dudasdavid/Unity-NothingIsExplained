@@ -36,7 +36,7 @@ public class MarioFireball : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag.Contains("Enemy")) {
 			Enemy enemy = other.gameObject.GetComponent<Enemy> ();
-			t_LevelManager.FireballTouchEnemy (enemy);
+			//t_LevelManager.FireballTouchEnemy (enemy);
 			Explode ();
 		} else { // bounce off grounds
 			Vector2 normal = other.contacts[0].normal;
@@ -57,7 +57,7 @@ public class MarioFireball : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag.Contains ("Enemy")) {
 			Enemy enemy = other.gameObject.GetComponent<Enemy> ();
-			t_LevelManager.FireballTouchEnemy (enemy);
+			//t_LevelManager.FireballTouchEnemy (enemy);
 			Explode ();
 		} 
 	}

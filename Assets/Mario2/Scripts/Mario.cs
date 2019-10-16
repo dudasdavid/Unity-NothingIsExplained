@@ -75,7 +75,7 @@ public class Mario : MonoBehaviour {
 		normalGravity = m_Rigidbody2D.gravityScale;
 
 		// Drop Mario at spawn position
-		transform.position = FindObjectOfType<LevelManager>().FindSpawnPosition();
+		//transform.position = FindObjectOfType<LevelManager>().FindSpawnPosition();
 
 		// Set correct size
 		UpdateSize ();
@@ -284,20 +284,7 @@ public class Mario : MonoBehaviour {
 		isChangingDirection = currentSpeedX > 0 && faceDirectionX * moveDirectionX < 0;
 
 
-		if (inputFreezed && !t_LevelManager.gamePaused) {
-			if (isDying) {
-				deadUpTimer -= Time.unscaledDeltaTime;
-				if (deadUpTimer > 0) { // TODO MovePosition not working
-//					m_Rigidbody2D.MovePosition (m_Rigidbody2D.position + deadUpVelocity * Time.unscaledDeltaTime);
-					gameObject.transform.position += Vector3.up * .22f;
-				} else {
-//					m_Rigidbody2D.MovePosition (m_Rigidbody2D.position + deadDownVelocity * Time.unscaledDeltaTime);
-					gameObject.transform.position += Vector3.down * .2f;
-				}
-			} else if (isClimbingFlagPole) {
-				m_Rigidbody2D.MovePosition (m_Rigidbody2D.position + climbFlagPoleVelocity * Time.deltaTime);
-			}
-		}
+
 	}
 
 
@@ -407,28 +394,7 @@ public class Mario : MonoBehaviour {
 		Vector2 bottomSide = new Vector2 (0f, 1f);
 		bool bottomHit = normal == bottomSide;
 
-		if (other.gameObject.tag.Contains ("Enemy")) { // TODO: koopa shell static does no damage
-			Enemy enemy = other.gameObject.GetComponent<Enemy> ();
 
-			if (!t_LevelManager.isInvincible ()) {
-				if (!other.gameObject.GetComponent<KoopaShell> () || 
-					other.gameObject.GetComponent<KoopaShell> ().isRolling ||  // non-rolling shell should do no damage
-					!bottomHit || (bottomHit && !enemy.isBeingStomped)) 
-				{
-					Debug.Log (this.name + " OnCollisionEnter2D: Damaged by " + other.gameObject.name
-						+ " from " + normal.ToString () + "; isFalling=" + isFalling); // TODO sometimes fire before stompbox reacts
-					t_LevelManager.MarioPowerDown ();
-				}
-
-			} else if (t_LevelManager.isInvincibleStarman) {
-				t_LevelManager.MarioStarmanTouchEnemy (enemy);
-			}
-		
-		} else if (other.gameObject.tag == "Goal" && isClimbingFlagPole && bottomHit) {
-			Debug.Log (this.name + ": Mario hits bottom of flag pole");
-			isClimbingFlagPole = false;
-			JumpOffPole ();
-		}
 	}
 
 }

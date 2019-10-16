@@ -19,22 +19,6 @@ public class PipeWarpDown : MonoBehaviour {
 		stop = transform.parent.transform.Find ("Platform Stop");
 	}
 
-	void FixedUpdate() {
-		if (isMoving) {
-			if (transform.position.y > stop.position.y) {
-				if (!t_LevelManager.timerPaused) {
-					t_LevelManager.timerPaused = true;
-				}
-				transform.position = new Vector2 (transform.position.x, transform.position.y + platformVelocityY);
-			} else {
-				if (leadToSameLevel) {
-					t_LevelManager.LoadSceneCurrentLevel (sceneName);
-				} else {
-					t_LevelManager.LoadNewLevel (sceneName);
-				}
-			}
-		}
-	}
 
 	bool marioEntered = false;
 	void OnTriggerStay2D(Collider2D other) {

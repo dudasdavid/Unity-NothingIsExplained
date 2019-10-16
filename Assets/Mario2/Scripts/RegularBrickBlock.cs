@@ -30,7 +30,7 @@ public class RegularBrickBlock : MonoBehaviour {
 		if (other.tag == "Player" && time2-time1 >= WaitBetweenBounce) {
 			// Hit any enemy on top
 			foreach (GameObject enemyObj in enemiesOnTop) {
-				t_LevelManager.BlockHitEnemy (enemyObj.GetComponent<Enemy> ());
+				//t_LevelManager.BlockHitEnemy (enemyObj.GetComponent<Enemy> ());
 			}
 
 			// check and collect coins on top
@@ -45,7 +45,7 @@ public class RegularBrickBlock : MonoBehaviour {
 				t_LevelManager.soundSource.PlayOneShot (t_LevelManager.bumpSound);
 			} else {
 				BreakIntoPieces ();
-				t_LevelManager.AddScore(t_LevelManager.breakBlockBonus);
+				//t_LevelManager.AddScore(t_LevelManager.breakBlockBonus);
 				t_LevelManager.soundSource.PlayOneShot (t_LevelManager.breakBlockSound);
 			}
 			time1 = Time.time;

@@ -23,7 +23,7 @@ public class Castle : MonoBehaviour {
 			if (flag.position.y < flagStop.position.y) {
 				flag.position = new Vector2 (flag.position.x, flag.position.y + flagVelocityY);
 			} else {
-				t_LevelManager.LoadNewLevel (sceneName, t_LevelManager.levelCompleteMusic.length);
+				//t_LevelManager.LoadNewLevel (sceneName, t_LevelManager.levelCompleteMusic.length);
 			}
 		}
 	}
@@ -31,7 +31,7 @@ public class Castle : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag == "Player") {
 			moveFlag = true;
-			t_LevelManager.MarioCompleteLevel ();
+			//t_LevelManager.MarioCompleteLevel ();
 		}
 	}
 }

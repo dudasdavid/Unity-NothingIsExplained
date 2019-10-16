@@ -27,12 +27,14 @@ public class PlayerControl : MonoBehaviour
 
     private Animator m_Animator;
     private SpriteRenderer spriteRenderer;
+    private CameraController camCtrl;
 
     // Start is called before the first frame update
     void Start()
     {
         m_Animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        camCtrl = FindObjectOfType<CameraController>();
     }
 
     // Update is called once per frame
@@ -218,7 +220,7 @@ public class PlayerControl : MonoBehaviour
             {
                 jumpCount = 0;
                 isJumping = false;
-                //Debug.Log("Touch ground");
+                //Debug.Log("Touch top");
             }
         }
         else
@@ -227,6 +229,7 @@ public class PlayerControl : MonoBehaviour
             {
                 jumpCount = 0;
                 isJumping = false;
+                camCtrl.followCameraY = false;
                 //Debug.Log("Touch ground");
             }
         }

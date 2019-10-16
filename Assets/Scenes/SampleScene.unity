@@ -120,66 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &18492027
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1756069936}
-    m_Modifications:
-    - target: {fileID: 1485481461405040, guid: 8130008fbd8044b4e94595114a970409, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4908287474821086, guid: 8130008fbd8044b4e94595114a970409, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4908287474821086, guid: 8130008fbd8044b4e94595114a970409, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4908287474821086, guid: 8130008fbd8044b4e94595114a970409, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4908287474821086, guid: 8130008fbd8044b4e94595114a970409, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4908287474821086, guid: 8130008fbd8044b4e94595114a970409, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4908287474821086, guid: 8130008fbd8044b4e94595114a970409, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4908287474821086, guid: 8130008fbd8044b4e94595114a970409, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4908287474821086, guid: 8130008fbd8044b4e94595114a970409, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114310586089754620, guid: 8130008fbd8044b4e94595114a970409,
-        type: 3}
-      propertyPath: timeLeft
-      value: 999
-      objectReference: {fileID: 0}
-    - target: {fileID: 114310586089754620, guid: 8130008fbd8044b4e94595114a970409,
-        type: 3}
-      propertyPath: lives
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 114310586089754620, guid: 8130008fbd8044b4e94595114a970409,
-        type: 3}
-      propertyPath: marioSize
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8130008fbd8044b4e94595114a970409, type: 3}
 --- !u!1 &92222727
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,7 +708,7 @@ Transform:
   - {fileID: 1187547284}
   - {fileID: 1717645884}
   m_Father: {fileID: 1756069936}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -810,12 +750,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1346341142}
-  yOffset: 0
+  yOffset: 4.5
   colDepth: 4
   zPosition: 0
   bottomOffset: 0.5
   topOffset: 14
-  followCameraY: 0
+  followCameraY: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -867,7 +807,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.83, y: 9.43, z: -10}
+  m_LocalPosition: {x: 8.83, y: 14.21, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1573,12 +1513,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4150869502555572, guid: ffc5fa0e4ad2f4d279a007bafa62964a,
     type: 3}
   m_PrefabInstance: {fileID: 1404822909}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1046211241 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4908287474821086, guid: 8130008fbd8044b4e94595114a970409,
-    type: 3}
-  m_PrefabInstance: {fileID: 18492027}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1049254407
 PrefabInstance:
@@ -2314,12 +2248,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346341142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.41, y: 8.77, z: 0}
+  m_LocalPosition: {x: 1.41, y: 11.01, z: 0}
   m_LocalScale: {x: 3.1163, y: 2.016519, z: 1}
   m_Children:
   - {fileID: 401742927}
   m_Father: {fileID: 1756069936}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1346341144
 BoxCollider2D:
@@ -2685,12 +2619,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73fb07ac7d5f744a48fe6c56ff43ae1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurryUp: 0
   marioSize: 0
-  lives: 100
   coins: 0
-  scores: 0
-  timeLeft: 999
   isInvinciblePowerdown: 0
   isInvincibleStarman: 0
   scoreText: {fileID: 1868163690}
@@ -2700,13 +2630,7 @@ MonoBehaviour:
     type: 3}
   musicSource: {fileID: 1473915062}
   soundSource: {fileID: 1578783163}
-  pauseSoundSource: {fileID: 539007279}
   levelMusic: {fileID: 8300000, guid: a396fb5db437f453d89c54963e7b9719, type: 3}
-  levelMusicHurry: {fileID: 8300000, guid: 980db8ff7fdfd4de9b676bef749ea0a7, type: 3}
-  starmanMusic: {fileID: 8300000, guid: fe80c79237cc34e99babbc6d54016d93, type: 3}
-  starmanMusicHurry: {fileID: 8300000, guid: f1d4bda1392ad4f6cb3bb8e494af8eb5, type: 3}
-  levelCompleteMusic: {fileID: 8300000, guid: 632e293310a2b4c088dd51fdeaa9d8b8, type: 3}
-  castleCompleteMusic: {fileID: 8300000, guid: 6dbea1eceaa2e48b6aa7c92fac4fbafe, type: 3}
   oneUpSound: {fileID: 8300000, guid: cdc43de50f4574c75afcc7e74975b29a, type: 3}
   bowserFallSound: {fileID: 8300000, guid: 04c05e6a635a94c57ba4f3a3f3aaa89f, type: 3}
   bowserFireSound: {fileID: 8300000, guid: de02ec0c771a0476cb3609ebf94653a8, type: 3}
@@ -2724,15 +2648,6 @@ MonoBehaviour:
   powerupAppearSound: {fileID: 8300000, guid: 97a450c65284a4a3094ba5c2221a492b, type: 3}
   stompSound: {fileID: 8300000, guid: d84415726495b4d46b5a557ed2a97cfa, type: 3}
   warningSound: {fileID: 8300000, guid: c0ea6c25686884e1a9547efdebf43492, type: 3}
-  coinBonus: 200
-  powerupBonus: 1000
-  starmanBonus: 1000
-  oneupBonus: 0
-  breakBlockBonus: 50
-  stompBounceVelocity: {x: 0, y: 15}
-  gamePaused: 0
-  timerPaused: 0
-  musicPaused: 0
 --- !u!4 &1452552069
 Transform:
   m_ObjectHideFlags: 0
@@ -2748,7 +2663,7 @@ Transform:
   - {fileID: 1578783164}
   - {fileID: 539007280}
   m_Father: {fileID: 1756069936}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1468742002
 GameObject:
@@ -3430,7 +3345,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1046211241}
   - {fileID: 1452552069}
   - {fileID: 1346341143}
   - {fileID: 462616453}

@@ -28,13 +28,13 @@ public class BridgeAxe : MonoBehaviour {
 		if (other.tag == "Player" && !gotAxe) {
 			gotAxe = true;
 			mario.FreezeUserInput ();
-			t_LevelManager.timerPaused = true;
+			//t_LevelManager.timerPaused = true;
 
 			if (bowser) {  // bowser not yet defeated
 				bowser.active = false; 
 				StartCoroutine (CollapseBridgeCo ());
 			} else {
-				t_LevelManager.MarioCompleteCastle ();
+				//t_LevelManager.MarioCompleteCastle ();
 			}
 			gameObject.GetComponent<SpriteRenderer> ().enabled = false;
 		}
@@ -49,7 +49,7 @@ public class BridgeAxe : MonoBehaviour {
 			t_LevelManager.soundSource.PlayOneShot (t_LevelManager.breakBlockSound);
 			yield return new WaitForSeconds (waitBetweenCollapse);
 		}
-		t_LevelManager.MarioCompleteCastle ();
+		//t_LevelManager.MarioCompleteCastle ();
 		Destroy (gameObject);
 	}
 }

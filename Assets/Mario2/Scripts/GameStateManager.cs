@@ -61,14 +61,6 @@ public class GameStateManager : MonoBehaviour {
 		hurryUp = false;
 	}
 
-	public void SaveGameState() {
-		LevelManager t_LevelManager = FindObjectOfType<LevelManager> ();
-		marioSize = t_LevelManager.marioSize;
-		lives = t_LevelManager.lives;
-		coins = t_LevelManager.coins;
-		scores = t_LevelManager.scores;
-		timeLeft = t_LevelManager.timeLeft;
-		hurryUp = t_LevelManager.hurryUp;
-	}
+
 
 }

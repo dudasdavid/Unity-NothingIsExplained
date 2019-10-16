@@ -28,8 +28,8 @@ public class MainCamera : MonoBehaviour {
 		cameraWidth = Camera.main.orthographicSize * aspectRatio;
 
 		// Initialize camera's position
-		Vector3 spawnPosition = FindObjectOfType<LevelManager>().FindSpawnPosition();
-		targetPosition = new Vector3 (spawnPosition.x, transform.position.y, transform.position.z);
+		//Vector3 spawnPosition = FindObjectOfType<LevelManager>().FindSpawnPosition();
+		//targetPosition = new Vector3 (spawnPosition.x, transform.position.y, transform.position.z);
 
 		bool passedLeftEdge = targetPosition.x < leftEdge.position.x + cameraWidth;
 

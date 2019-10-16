@@ -28,7 +28,7 @@ public class PipeWarpSide : MonoBehaviour {
 		if (other.tag == "Player") {
 			mario.AutomaticWalk (mario.levelEntryWalkSpeedX);
 			reachedPortal = true;
-			t_LevelManager.timerPaused = true;
+			//t_LevelManager.timerPaused = true;
 			Debug.Log (this.name + " OnTriggerEnter2D: " + transform.parent.gameObject.name 
 				+ " recognizes player, should automatic walk");
 		}
@@ -42,12 +42,12 @@ public class PipeWarpSide : MonoBehaviour {
 				Debug.Log (this.name + " OnCollisionEnter2D: " + transform.parent.gameObject.name 
 					+ " teleports player to different scene same level " + sceneName
 					+ ", pipe idx " + spawnPipeIdx);
-				t_LevelManager.LoadSceneCurrentLevelSetSpawnPipe (sceneName, spawnPipeIdx);
+				//t_LevelManager.LoadSceneCurrentLevelSetSpawnPipe (sceneName, spawnPipeIdx);
 			} else {
 				Debug.Log (this.name + " OnCollisionEnter2D: " + transform.parent.gameObject.name
 					+ " teleports player to new level " + sceneName 
 					+ ", pipe idx " + spawnPipeIdx);
-				t_LevelManager.LoadNewLevel (sceneName);
+				//t_LevelManager.LoadNewLevel (sceneName);
 			}
 		}
 	}

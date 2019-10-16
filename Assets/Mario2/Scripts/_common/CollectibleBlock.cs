@@ -45,10 +45,6 @@ public class CollectibleBlock : MonoBehaviour {
 			if (isActive) {
 				m_Animator.SetTrigger ("bounce");
 
-				// Hit any enemy on top
-				foreach (GameObject enemyObj in enemiesOnTop) {
-					t_LevelManager.BlockHitEnemy (enemyObj.GetComponent<Enemy> ());
-				}
 
 				if (timesToSpawn > 0) {
 					if (isPowerupBlock) { // spawn mushroom or fireflower depending on Mario's size

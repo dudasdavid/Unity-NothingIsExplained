@@ -26,7 +26,7 @@ public class PipeWarpUp : MonoBehaviour {
 		if (!t_GameStateManager.spawnFromPoint && t_GameStateManager.spawnPipeIdx == transform.parent.GetSiblingIndex ()) {
 			isTakingMarioUp = true;
 			mario.FreezeUserInput ();
-			t_LevelManager.timerPaused = true;
+			//t_LevelManager.timerPaused = true;
 			Debug.Log (this.name + " Start: " + transform.parent.gameObject.name + " taking Mario up");
 		} else {
 			isTakingMarioUp = false;
@@ -37,20 +37,14 @@ public class PipeWarpUp : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (isTakingMarioUp) {
-			if (transform.position.y < stop.position.y) {
-				transform.position = new Vector2 (transform.position.x, transform.position.y + platformVelocityY);
-			} else if (t_LevelManager.timerPaused) {
-				GameStateManager t_GameStateManager = FindObjectOfType<GameStateManager> ();
-				t_GameStateManager.spawnFromPoint = true;
-				if (resetSpawnPoint) {
-					t_GameStateManager.ResetSpawnPosition ();
-				}
-				mario.UnfreezeUserInput ();
-				t_LevelManager.timerPaused = false;
-				isTakingMarioUp = false;
-			}		
-		}
+        if (isTakingMarioUp)
+        {
+            if (transform.position.y < stop.position.y)
+            {
+                transform.position = new Vector2(transform.position.x, transform.position.y + platformVelocityY);
+
+            }
+        }
 	}
 		
 }
