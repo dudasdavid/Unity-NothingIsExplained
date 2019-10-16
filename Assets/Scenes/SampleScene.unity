@@ -1608,7 +1608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061016074}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.68, y: 21.74, z: 0}
+  m_LocalPosition: {x: 13.68, y: 25.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1401958842}
@@ -2233,6 +2233,8 @@ GameObject:
   - component: {fileID: 1346341144}
   - component: {fileID: 1346341147}
   - component: {fileID: 1346341148}
+  - component: {fileID: 1346341149}
+  - component: {fileID: 1346341150}
   m_Layer: 0
   m_Name: Mario
   m_TagString: Player
@@ -2262,13 +2264,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346341142}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003, y: 0.11}
+  m_Offset: {x: 0.003, y: 0.13}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2279,7 +2281,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24, y: 0.3}
+  m_Size: {x: 0.24, y: 0.25}
   m_EdgeRadius: 0
 --- !u!23 &1346341145
 MeshRenderer:
@@ -2369,6 +2371,38 @@ MonoBehaviour:
   rigidBody: {fileID: 1346341147}
   isDoubleJumpEnabled: 0
   invertGravity: 0
+--- !u!58 &1346341149
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346341142}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.03}
+  serializedVersion: 2
+  m_Radius: 0.05
+--- !u!70 &1346341150
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346341142}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.005, y: 0.1}
+  m_Size: {x: 0.23, y: 0.3}
+  m_Direction: 1
 --- !u!4 &1368278024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4982293798778740, guid: f81d940271e184463825dd68ea0a061c,
