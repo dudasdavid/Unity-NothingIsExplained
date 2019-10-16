@@ -216,10 +216,6 @@ public class LevelManager : MonoBehaviour
             Time.timeScale = 0f;
             //mario.FreezeAndDie ();
 
-            if (timeup)
-            {
-                Debug.Log(this.name + " MarioRespawn: called due to timeup");
-            }
 
         }
     }
