@@ -6,7 +6,6 @@ public class Firebar : Enemy {
 	public Transform pivot;
 	public float rotateSpeed = 75;
 	private LevelManager t_LevelManager;
-	private GameObject mario;
 	public bool canMove;
 	private bool canMoveAutomatic = true;
 	private float minDistanceToMove = 14f;
@@ -14,8 +13,6 @@ public class Firebar : Enemy {
 	// Use this for initialization
 	void Start () {
 		t_LevelManager = FindObjectOfType<LevelManager> ();
-		mario = FindObjectOfType<Mario> ().gameObject;
-
 		starmanBonus = 0;
 		rollingShellBonus = 0;
 		hitByBlockBonus = 0;
@@ -25,11 +22,7 @@ public class Firebar : Enemy {
 
 
 	void Update() {
-		if (!canMove & Mathf.Abs (mario.transform.position.x - transform.position.x) <= minDistanceToMove && canMoveAutomatic) {
-			canMove = true;
-		} else if (canMove) {
-			transform.RotateAround(pivot.position, Vector3.forward, rotateSpeed * Time.deltaTime);
-		}
+		transform.RotateAround(pivot.position, Vector3.forward, rotateSpeed * Time.deltaTime);
 	}
 
 	public override void TouchedByStarmanMario() {

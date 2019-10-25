@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerControl : MonoBehaviour
     public float doubleJumpVelocity;
     public float slowDown;
     public Rigidbody2D rigidBody;
+
+    public UnityEvent onDeath;
 
     private Vector2 velocityVector2D = Vector2.zero;
     private int jumpFlag = 0;
@@ -138,8 +141,6 @@ public class PlayerControl : MonoBehaviour
             isCrouching = false;
         }
 
-        Debug.Log(forwardFlag);
-
         if (forwardFlag == 1)
         {
             if (velocityVector2D.x <= velocity)
@@ -244,6 +245,11 @@ public class PlayerControl : MonoBehaviour
     public void UpdateSize()
     {
         GetComponentInChildren<Animator>().SetInteger("marioSize", FindObjectOfType<LevelManager>().marioSize);
+    }
+
+    public void Die()
+    {
+        onDeath?.Invoke();
     }
 
 }

@@ -274,4 +274,9 @@ public class LevelManager : MonoBehaviour
         SetHudCoin();
         //AddScore (coinBonus, spawnPos);
     }
+
+    public void GameOver()
+    {
+        Debug.Log("Game over");
+    }
 }
