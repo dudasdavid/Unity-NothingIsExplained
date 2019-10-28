@@ -14,7 +14,10 @@ public class CollectibleBlock : MonoBehaviour {
 	public bool isPowerupBlock;
     public bool isSelfDestroy;
     public bool isInvertGravity;
+    public bool isRevertGravity;
     public bool isSmallButFast;
+    public bool isSlowDown;
+    public bool isCoinOnly;
 
 
     public GameObject objectToSpawn;
@@ -67,9 +70,23 @@ public class CollectibleBlock : MonoBehaviour {
                         t_LevelManager.MarioInvertGravity();
                         
                     }
+                    if (isRevertGravity)
+                    {
+                        t_LevelManager.MarioNormalGravity();
+
+                    }
+                    if (isSlowDown)
+                    {
+                        t_LevelManager.MarioSlowDown();
+                    }
                     if (isSmallButFast)
                     {
                         t_LevelManager.MarioSmallButFast();
+                    }
+
+                    if (isCoinOnly)
+                    {
+                        t_LevelManager.AddCoin();
                     }
 
                     //Instantiate (objectToSpawn, transform.position + spawnPositionOffset, Quaternion.identity);

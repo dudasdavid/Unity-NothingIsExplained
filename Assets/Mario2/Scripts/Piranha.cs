@@ -14,7 +14,7 @@ public class Piranha : Enemy {
 	// Use this for initialization
 	void Start () {
 		t_LevelManager = FindObjectOfType<LevelManager> ();
-		mario = FindObjectOfType<Mario> ().gameObject;
+		//mario = FindObjectOfType<Mario> ().gameObject;
 		m_CircleCollider2D = GetComponent<CircleCollider2D> ();
 		patrolScript = GetComponent<PatrolVertical> ();
 		visible = false;
@@ -34,13 +34,9 @@ public class Piranha : Enemy {
 
 	void Update() {
 		if (visible) {
-			if (Mathf.Abs (mario.transform.position.x - transform.position.x) > maxDistanceToMove) {
-				m_CircleCollider2D.enabled = true;
-				patrolScript.canMove = true;
-			} else if (patrolScript.isAtDownStop) { // do not emerge
-				m_CircleCollider2D.enabled = false;
-				patrolScript.canMove = false;
-			}
+			m_CircleCollider2D.enabled = true;
+			//patrolScript.canMove = true;
+
 		}
 	}
 
@@ -68,7 +64,7 @@ public class Piranha : Enemy {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Player") {
-			t_LevelManager.MarioPowerDown ();
+			t_LevelManager.MarioDies();
 		}
 	}
 }

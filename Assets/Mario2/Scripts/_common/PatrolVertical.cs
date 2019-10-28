@@ -30,7 +30,7 @@ public class PatrolVertical : MonoBehaviour {
 
 
 	void Start() {
-		mario = FindObjectOfType<Mario> ().gameObject;
+		//mario = FindObjectOfType<Mario> ().gameObject;
 		if (transform.position.y >= UpStop.position.y) {
 			directionY = -1;
 		} else if (transform.position.y <= DownStop.position.y) {
@@ -42,11 +42,11 @@ public class PatrolVertical : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (!canMove & Mathf.Abs (mario.transform.position.x - transform.position.x) <= minDistanceToMove && canMoveAutomatic) {
-			canMove = true;
-		}
 
-		else if (canMove && Time.timeScale != 0) {
+	    canMove = false;
+
+
+		if (canMove && Time.timeScale != 0) {
 			if (!isAtUpStop && !isAtDownStop) {
 				currentAbsSpeed *= speedModifier;
 				transform.position += new Vector3 (0, currentAbsSpeed * directionY, 0);

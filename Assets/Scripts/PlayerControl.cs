@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class PlayerControl : MonoBehaviour
 {
     public float gravityFall;
+    public float gravityUp;
     public float velocity;
     public float velocityIncrement;
     public float jumpVelocity;
@@ -88,13 +89,13 @@ public class PlayerControl : MonoBehaviour
 
         if (invertGravity)
         {
-            rigidBody.gravityScale = rigidBody.velocity.y < 0 ? 1f : gravityFall;
+            rigidBody.gravityScale = rigidBody.velocity.y < 0 ? gravityUp : gravityFall;
             rigidBody.gravityScale *= -1;
             spriteRenderer.flipY = true;
         }
         else
         {
-            rigidBody.gravityScale = rigidBody.velocity.y > 0 ? 1f : gravityFall;
+            rigidBody.gravityScale = rigidBody.velocity.y > 0 ? gravityUp : gravityFall;
             spriteRenderer.flipY = false;
         }
 

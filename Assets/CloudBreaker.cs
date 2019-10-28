@@ -27,7 +27,7 @@ public class CloudBreaker : MonoBehaviour
         if (jumpCounter == 10)
         {
             Destroy(gameObject);
-            t_LevelManager.MarioNormalGravity();
+            //t_LevelManager.MarioNormalGravity();
         }
     } 
 }
