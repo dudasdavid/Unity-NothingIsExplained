@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     public int coins;
 
     private bool isRespawning;
-    private bool isPoweringDown;
+    public bool isPoweringDown;
 
     public bool isInvinciblePowerdown;
     public bool isInvincibleStarman;
@@ -30,6 +30,9 @@ public class LevelManager : MonoBehaviour
     public Text timeText;
     public GameObject FloatingTextEffect;
     private const float floatingTextOffsetY = 2f;
+
+    private float timeSpent = 0f;
+    private int timeSpentInt = 0;
 
     public AudioSource musicSource;
     public AudioSource soundSource;
@@ -86,6 +89,12 @@ public class LevelManager : MonoBehaviour
 
 
         Debug.Log(this.name + " Start: current scene is " + SceneManager.GetActiveScene().name);
+    }
+
+    void Update()
+    {
+        timeSpent += Time.deltaTime / 1.0f;
+        SetHudTime();
     }
 
 
@@ -158,8 +167,8 @@ public class LevelManager : MonoBehaviour
     public void MarioSmallButFast()
     {
         MarioPowerDown();
-        mario.isDoubleJumpEnabled = false;
         mario.velocity = mario.defaultFastSpeed;
+        
     }
 
     public void MarioSlowDown()
@@ -173,7 +182,7 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log(this.name + " MarioPowerDown: called and executed");
             isPoweringDown = true;
-
+            mario.isDoubleJumpEnabled = false;
             if (marioSize > 0)
             {
                 StartCoroutine(MarioPowerDownCo());
@@ -181,7 +190,7 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
-                //MarioRespawn();
+                isPoweringDown = false;
             }
             Debug.Log(this.name + " MarioPowerDown: done executing");
         }
@@ -244,8 +253,8 @@ public class LevelManager : MonoBehaviour
 
     public void SetHudTime()
     {
-        ///timeLeftInt = Mathf.RoundToInt (timeLeft);
-        ///timeText.text = timeLeftInt.ToString ("D3");
+        timeSpentInt = Mathf.RoundToInt (timeSpent);
+        timeText.text = timeSpentInt.ToString ("D3");
     }
 
     public void CreateFloatingText(string text, Vector3 spawnPos)

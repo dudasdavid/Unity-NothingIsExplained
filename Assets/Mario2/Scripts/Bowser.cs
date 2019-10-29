@@ -136,6 +136,7 @@ public class Bowser : Enemy {
         if (other.gameObject.tag == "Collider")
         {
             active = false;
+            Destroy(gameObject);
         }
     }
 }

@@ -43,7 +43,15 @@ public class BowserFire : Enemy {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Player") {
-			t_LevelManager.MarioDies();
+            if (t_LevelManager.marioSize == 0)
+            {
+                t_LevelManager.MarioDies();
+            }
+            else
+            {
+                t_LevelManager.MarioPowerDown();
+            }
+
 		}
 	}
 }
