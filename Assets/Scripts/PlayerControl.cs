@@ -28,7 +28,7 @@ public class PlayerControl : MonoBehaviour
     private int backwardFlag = 0;
     private int duckFlag = 0;
 
-    private int jumpCount;
+    public int jumpCount;
     private bool isJumping;
     private bool isCrouching;
 

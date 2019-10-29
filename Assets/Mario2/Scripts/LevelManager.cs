@@ -166,6 +166,7 @@ public class LevelManager : MonoBehaviour
 
     public void MarioSmallButFast()
     {
+        mario.jumpCount = 1;
         MarioPowerDown();
         mario.velocity = mario.defaultFastSpeed;
         
