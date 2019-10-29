@@ -35,6 +35,8 @@ public class PlayerControl : MonoBehaviour
     public bool isDoubleJumpEnabled;
     public bool invertGravity;
 
+    private bool activateFlag = true;
+
     private Animator m_Animator;
     private SpriteRenderer spriteRenderer;
     private CameraController camCtrl;
@@ -86,6 +88,13 @@ public class PlayerControl : MonoBehaviour
         {
             t_LevelManager.MarioRespawn();
         }
+
+        if ((rigidBody.position.x > 150) && activateFlag)
+        {
+            t_LevelManager.OpenGround();
+            activateFlag = false;
+        }
+        //Debug.Log(rigidBody.position.x);
     }
 
     // Update is called once per frame

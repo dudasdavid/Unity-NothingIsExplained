@@ -54,6 +54,9 @@ public class LevelManager : MonoBehaviour
     public AudioClip stompSound;
     public AudioClip warningSound;
 
+    public GameObject movingGround;
+    private Vector3 newPos;
+
 
     void Awake()
     {
@@ -283,4 +286,12 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("Game over");
     }
+
+    public void OpenGround()
+    {
+        newPos = movingGround.transform.position;
+        newPos.x += 10;
+        movingGround.transform.position = newPos;
+    }
+
 }
