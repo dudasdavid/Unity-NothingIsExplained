@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Pixelplacement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -267,5 +268,16 @@ public class PlayerControl : MonoBehaviour
     {
         onDeath?.Invoke();
     }
+
+    public void FreezeAndDie()
+    {
+        //FreezeUserInput();
+        //isDying = true;
+        GetComponent<Collider2D>().enabled = false;
+        m_Animator.SetTrigger("respawn");
+		Tween.Position(transform, transform.position + new Vector3(0, 2, 0), .5f, 0, Tween.EaseInOut, Tween.LoopType.None, null, null, false);
+		Tween.Position(transform, transform.position - new Vector3(0, 10, 0), 1, .5f, Tween.EaseInOut, Tween.LoopType.None, null, null, false);
+
+	}
 
 }

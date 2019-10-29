@@ -220,7 +220,8 @@ public class LevelManager : MonoBehaviour
 
     public void MarioRespawn(bool timeup = false)
     {
-        Application.LoadLevel(Application.loadedLevel);
+
+		StartCoroutine(RestartWithDelay(2f));
         if (!isRespawning)
         {
             isRespawning = true;
@@ -232,17 +233,27 @@ public class LevelManager : MonoBehaviour
             soundSource.PlayOneShot(deadSound);
 
             Time.timeScale = 0f;
-            //mario.FreezeAndDie ();
+            mario.FreezeAndDie ();
 
 
         }
     }
 
+	IEnumerator RestartWithDelay(float time)
+	{
+		float start = Time.realtimeSinceStartup;
+		while (Time.realtimeSinceStartup < start + time)
+		{
+			yield return null;
+		}
+		Application.LoadLevel(Application.loadedLevel);
+	}
 
 
 
-    /****************** HUD and sound effects */
-    public void SetHudCoin()
+
+	/****************** HUD and sound effects */
+	public void SetHudCoin()
     {
         coinText.text = "x" + coins.ToString("D2");
     }
