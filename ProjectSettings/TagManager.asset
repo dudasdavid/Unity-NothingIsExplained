@@ -8,6 +8,10 @@ TagManager:
   - Coin
   - Ground
   - Platform
+  - Enemy/Piranha
+  - Goal
+  - Enemy/Bowser
+  - Collider
   layers:
   - Default
   - TransparentFX

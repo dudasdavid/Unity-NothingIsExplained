@@ -89,7 +89,7 @@ public class PlayerControl : MonoBehaviour
             t_LevelManager.MarioRespawn();
         }
 
-        if ((rigidBody.position.x > 150) && activateFlag)
+        if ((rigidBody.position.x > 150) && activateFlag && (t_LevelManager.coins < 10))
         {
             t_LevelManager.OpenGround();
             activateFlag = false;
@@ -248,7 +248,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            if (col.gameObject.transform.position.y < rigidBody.transform.position.y)
+            if (col.gameObject.transform.position.y < rigidBody.transform.position.y && col.gameObject.tag == "Platform")
             {
                 jumpCount = 0;
                 isJumping = false;

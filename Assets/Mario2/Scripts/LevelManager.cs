@@ -290,7 +290,7 @@ public class LevelManager : MonoBehaviour
     public void OpenGround()
     {
         newPos = movingGround.transform.position;
-        newPos.x += 10;
+        newPos.x += 50;
         movingGround.transform.position = newPos;
     }
 

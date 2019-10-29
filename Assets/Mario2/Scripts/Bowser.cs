@@ -14,10 +14,10 @@ public class Bowser : Enemy {
 	public bool active;
 
 	private Vector2 impostorInitialVelocity = new Vector2 (3, 3);
-	private float minDistanceToMove = 55; // start moving if mario is within this distance
+	private float minDistanceToMove = 40; // start moving if mario is within this distance
 
 	private int fireResistance = 5;
-	private float waitBetweenJump = 3;
+	private float waitBetweenJump = 4;
 	private float shootFireDelay = .1f; // how long after jump should Bowser release fireball
 
 	private float absSpeedX = 1.5f;
@@ -34,7 +34,7 @@ public class Bowser : Enemy {
 	// Use this for initialization
 	void Start () {
 		t_LevelManager = FindObjectOfType<LevelManager> ();
-		mario = FindObjectOfType<Mario> ().gameObject;
+		mario = FindObjectOfType<PlayerControl> ().gameObject;
 		m_Rigidbody2D = GetComponent<Rigidbody2D> ();
 		timer = 0;
 		canMove = false;
@@ -81,10 +81,7 @@ public class Bowser : Enemy {
 				}
 
 			}
-		} else if (m_Rigidbody2D.velocity.y < 0 && !isFalling) { // fall as bridge collapses
-			isFalling = true;
-			t_LevelManager.soundSource.PlayOneShot (t_LevelManager.bowserFallSound);
-		}
+		} 
 	}
 
 	IEnumerator ShootFireCo(float delay) {
@@ -119,16 +116,26 @@ public class Bowser : Enemy {
 	public override void StompedByMario() {
 	}
 
-	void OnCollisionEnter2D(Collision2D other) {
-		Vector2 normal = other.contacts[0].normal;
-		Vector2 leftSide = new Vector2 (-1f, 0f);
-		Vector2 rightSide = new Vector2 (1f, 0f);
-		bool sideHit = normal == leftSide || normal == rightSide;
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Vector2 normal = other.contacts[0].normal;
+        Vector2 leftSide = new Vector2(-1f, 0f);
+        Vector2 rightSide = new Vector2(1f, 0f);
+        bool sideHit = normal == leftSide || normal == rightSide;
 
-		if (other.gameObject.tag == "Player") {
-			t_LevelManager.MarioPowerDown ();
-		} else if (sideHit && other.gameObject.tag != "Mario Fireball") { // switch walk direction
-			directionX = -directionX;
-		}
-	}
+
+        if (other.gameObject.tag == "Player")
+        {
+            t_LevelManager.MarioDies();
+        }
+        else if (sideHit && other.gameObject.tag != "Mario Fireball")
+        { // switch walk direction
+            directionX = -directionX;
+        }
+
+        if (other.gameObject.tag == "Collider")
+        {
+            active = false;
+        }
+    }
 }

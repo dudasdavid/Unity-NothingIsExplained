@@ -9,6 +9,8 @@ public class CloudBreaker : MonoBehaviour
     public int jumpCounter;
     private LevelManager t_LevelManager;
 
+    public GameObject destroyPipe;
+
     void Start()
     {
         jumpCounter = 0;
@@ -27,6 +29,7 @@ public class CloudBreaker : MonoBehaviour
         if (jumpCounter == 10)
         {
             Destroy(gameObject);
+            Destroy(destroyPipe);
             //t_LevelManager.MarioNormalGravity();
         }
     } 
