@@ -12,6 +12,12 @@ public class PlayerControl : MonoBehaviour
     public float jumpVelocity;
     public float doubleJumpVelocity;
     public float slowDown;
+    public float defaultFastSpeed;
+    public float defaultNormalSpeed;
+    public float defaultJumpVelocity;
+    public float defaultDoubleJumpVelocity;
+    public float defaultJumpVelocityInverted;
+    public float defaultDoubleJumpVelocityInverted;
     public Rigidbody2D rigidBody;
 
     public UnityEvent onDeath;

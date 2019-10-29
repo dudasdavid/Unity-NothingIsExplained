@@ -137,8 +137,8 @@ public class LevelManager : MonoBehaviour
         soundSource.PlayOneShot(powerupSound); // should play sound regardless of size
         //AddScore (powerupBonus, mario.transform.position);
         mario.invertGravity = true;
-        mario.jumpVelocity = 3;
-        mario.doubleJumpVelocity = 2;
+        mario.jumpVelocity = mario.defaultJumpVelocityInverted;
+        mario.doubleJumpVelocity = mario.defaultDoubleJumpVelocityInverted;
         camCtrl.followCameraY = true;
     }
 
@@ -147,8 +147,8 @@ public class LevelManager : MonoBehaviour
         soundSource.PlayOneShot(powerupSound); // should play sound regardless of size
         //AddScore (powerupBonus, mario.transform.position);
         mario.invertGravity = false;
-        mario.jumpVelocity = 8.5f;
-        mario.doubleJumpVelocity = 6;
+        mario.jumpVelocity = mario.defaultJumpVelocity;
+        mario.doubleJumpVelocity = mario.defaultDoubleJumpVelocity;
         //camCtrl.followCameraY = false;
     }
 
@@ -156,12 +156,12 @@ public class LevelManager : MonoBehaviour
     {
         MarioPowerDown();
         mario.isDoubleJumpEnabled = false;
-        mario.velocity = 20;
+        mario.velocity = mario.defaultFastSpeed;
     }
 
     public void MarioSlowDown()
     {
-        mario.velocity = 7;
+        mario.velocity = mario.defaultNormalSpeed;
     }
 
     public void MarioPowerDown()

@@ -6,7 +6,8 @@ public class CameraController : MonoBehaviour
 
     public Transform player;
 
-    private Vector3 offset;        
+    private Vector3 offset;
+    private Vector3 position;
     public bool followCameraY;
 
 
@@ -20,8 +21,12 @@ public class CameraController : MonoBehaviour
     // LateUpdate is called after Update each frame
     void LateUpdate()
     {
-        Vector3 position = transform.position;
+        position = transform.position;
         position.x = Mathf.Max(position.x, player.position.x);
+        if (followCameraY)
+        {
+            position.y = player.position.y + 5;
+        }
         transform.position = position;
     }
 
