@@ -36,7 +36,7 @@ public class textCollider : MonoBehaviour
             //gameObject.GetComponent<BoxCollider2D>().enabled = false;
             gameObject.GetComponent<Rigidbody2D>().gravityScale = 10;
             counter++;
-            if (counter > 100)
+            if (counter > 62)
             {
                 text2hide.enabled = false;
                 t_LevelManager.MarioDies();
