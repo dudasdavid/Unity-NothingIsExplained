@@ -90,7 +90,7 @@ public class PlayerControl : MonoBehaviour
             t_LevelManager.MarioRespawn();
         }
 
-        if ((rigidBody.position.x > 150) && activateFlag && (t_LevelManager.coins < 10))
+        if ((rigidBody.position.x > 160) && activateFlag && (t_LevelManager.coins < 10))
         {
             t_LevelManager.OpenGround();
             activateFlag = false;

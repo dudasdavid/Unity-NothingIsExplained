@@ -27,7 +27,8 @@ public class FlagPole : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag == "Player" && !moveFlag) {
 			moveFlag = true;
-			//t_LevelManager.MarioReachFlagPole ();
-		}
+            
+            t_LevelManager.MarioReachFlagPole ();
+        }
 	}
 }

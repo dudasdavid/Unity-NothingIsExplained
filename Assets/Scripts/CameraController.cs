@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     private Vector3 offset;
     private Vector3 position;
     public bool followCameraY;
+    public float normalY;
 
 
     // Use this for initialization
@@ -26,6 +27,10 @@ public class CameraController : MonoBehaviour
         if (followCameraY)
         {
             position.y = player.position.y + 5;
+        }
+        else
+        {
+            position.y = normalY;
         }
         transform.position = position;
     }

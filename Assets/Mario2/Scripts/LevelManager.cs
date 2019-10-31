@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
     public int marioSize; // 0..2
     public int coins;
 
+    public bool gameOver = false;
+
     private bool isRespawning;
     public bool isPoweringDown;
 
@@ -28,6 +30,9 @@ public class LevelManager : MonoBehaviour
     public Text scoreText;
     public Text coinText;
     public Text timeText;
+    public Text gameOverText;
+    public Text winnerText;
+    public Text winnerText2;
     public GameObject FloatingTextEffect;
     private const float floatingTextOffsetY = 2f;
 
@@ -61,6 +66,8 @@ public class LevelManager : MonoBehaviour
     private Vector3 newPos;
 
 
+    private textCollider t_textCollider;
+
     void Awake()
     {
         Time.timeScale = 1;
@@ -83,6 +90,14 @@ public class LevelManager : MonoBehaviour
         soundSource.volume = PlayerPrefs.GetFloat("soundVolume");
 
         // HUD
+        gameOverText.enabled = false;
+        winnerText.enabled = false;
+        winnerText2.enabled = false;
+
+        t_textCollider = FindObjectOfType<textCollider>();
+        t_textCollider.GetComponent<BoxCollider2D>().enabled = false;
+
+
         SetHudCoin();
         SetHudScore();
         SetHudTime();
@@ -93,8 +108,12 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        timeSpent += Time.deltaTime / 1.0f;
-        SetHudTime();
+        if (!gameOver)
+        {
+            timeSpent += Time.deltaTime / 1.0f;
+            SetHudTime();
+        }
+
     }
 
 
@@ -139,6 +158,8 @@ public class LevelManager : MonoBehaviour
 
     public void MarioDies()
     {
+        gameOver = true;
+        gameOverText.enabled = true;
         soundSource.PlayOneShot(powerupSound); // should play sound regardless of size
         //AddScore (powerupBonus, mario.transform.position);
         MarioRespawn();
@@ -313,6 +334,24 @@ public class LevelManager : MonoBehaviour
         newPos = movingGround.transform.position;
         newPos.x += 50;
         movingGround.transform.position = newPos;
+    }
+
+    public void MarioReachFlagPole() {
+        gameOver = true;
+       
+
+        StartCoroutine(enableWithDelay(2f));
+    }
+
+    IEnumerator enableWithDelay(float time)
+    {
+        Debug.Log("Couroutine started");
+        yield return new WaitForSeconds(time);
+        winnerText.enabled = true;
+        winnerText2.enabled = true;
+        t_textCollider.GetComponent<BoxCollider2D>().enabled = true;
+        t_textCollider.GetComponent<Rigidbody2D>().simulated = true;
+        Debug.Log("Couroutine done");
     }
 
 }
