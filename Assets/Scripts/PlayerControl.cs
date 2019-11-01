@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     public float defaultDoubleJumpVelocity;
     public float defaultJumpVelocityInverted;
     public float defaultDoubleJumpVelocityInverted;
+    public float goombaJump;
     public AudioSource soundSource;
     public AudioClip jumpSmallSound;
     public AudioClip jumpBigSound;

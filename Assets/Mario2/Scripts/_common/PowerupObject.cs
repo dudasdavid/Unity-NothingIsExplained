@@ -28,6 +28,8 @@ public class PowerupObject : MonoBehaviour {
             mario.normalSprite.SetActive(false);
             mario.goombaSprite.SetActive(true);
             mario.UpdateSpriteRenderer();
+            t_LevelManager.MarioPowerDown();
+            mario.jumpVelocity = mario.goombaJump;
             Destroy (gameObject);
 		}
 	}

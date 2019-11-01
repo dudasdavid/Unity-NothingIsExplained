@@ -193,7 +193,6 @@ public class LevelManager : MonoBehaviour
     public void MarioSmallButFast()
     {
         soundSource.PlayOneShot(pipePowerdownSound);// should play sound regardless of size
-        mario.jumpCount = 1;
         MarioPowerDown();
         mario.velocity = mario.defaultFastSpeed;
         
@@ -211,6 +210,7 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log(this.name + " MarioPowerDown: called and executed");
             isPoweringDown = true;
+            mario.jumpCount = 1;
             mario.isDoubleJumpEnabled = false;
             if (marioSize > 0)
             {

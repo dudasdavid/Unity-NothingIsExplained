@@ -53,5 +53,9 @@ public class BowserFire : Enemy {
             }
 
 		}
-	}
+        else if (other.tag == "Collider")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
