@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
         position.x = Mathf.Max(position.x, player.position.x);
         if (followCameraY)
         {
-            position.y = player.position.y + 5;
+            position.y = player.position.y + 4;
         }
         else
         {

@@ -87,7 +87,8 @@ public class Bowser : Enemy {
 	IEnumerator ShootFireCo(float delay) {
 		yield return new WaitForSeconds (delay);
 		GameObject fire = Instantiate(BowserFire, FirePos.position, Quaternion.identity);
-		fire.GetComponent<BowserFire> ().directionX = transform.localScale.x;
+        fire.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+        fire.GetComponent<BowserFire> ().directionX = transform.localScale.x;
 		t_LevelManager.soundSource.PlayOneShot (t_LevelManager.bowserFireSound);
 	}
 

@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
     public AudioSource soundSource;
 
     public AudioClip levelMusic;
-
+    public AudioClip levelCompleteMusic;
     public AudioClip oneUpSound;
     public AudioClip bowserFallSound;
     public AudioClip bowserFireSound;
@@ -61,6 +61,8 @@ public class LevelManager : MonoBehaviour
     public AudioClip powerupAppearSound;
     public AudioClip stompSound;
     public AudioClip warningSound;
+
+    private bool toggle = false;
 
     public GameObject movingGround;
     private Vector3 newPos;
@@ -102,8 +104,11 @@ public class LevelManager : MonoBehaviour
         SetHudScore();
         SetHudTime();
 
+        ChangeMusic(levelMusic);
 
         Debug.Log(this.name + " Start: current scene is " + SceneManager.GetActiveScene().name);
+
+        
     }
 
     void Update()
@@ -160,14 +165,14 @@ public class LevelManager : MonoBehaviour
     {
         gameOver = true;
         gameOverText.enabled = true;
-        soundSource.PlayOneShot(powerupSound); // should play sound regardless of size
+        soundSource.PlayOneShot(fireballSound); // should play sound regardless of size
         //AddScore (powerupBonus, mario.transform.position);
         MarioRespawn();
     }
 
     public void MarioInvertGravity()
     {
-        soundSource.PlayOneShot(powerupSound); // should play sound regardless of size
+        soundSource.PlayOneShot(bowserFallSound); // should play sound regardless of size
         //AddScore (powerupBonus, mario.transform.position);
         mario.invertGravity = true;
         mario.jumpVelocity = mario.defaultJumpVelocityInverted;
@@ -177,7 +182,7 @@ public class LevelManager : MonoBehaviour
 
     public void MarioNormalGravity()
     {
-        soundSource.PlayOneShot(powerupSound); // should play sound regardless of size
+        soundSource.PlayOneShot(bowserFallSound); // should play sound regardless of size
         //AddScore (powerupBonus, mario.transform.position);
         mario.invertGravity = false;
         mario.jumpVelocity = mario.defaultJumpVelocity;
@@ -187,6 +192,7 @@ public class LevelManager : MonoBehaviour
 
     public void MarioSmallButFast()
     {
+        soundSource.PlayOneShot(pipePowerdownSound);// should play sound regardless of size
         mario.jumpCount = 1;
         MarioPowerDown();
         mario.velocity = mario.defaultFastSpeed;
@@ -195,6 +201,7 @@ public class LevelManager : MonoBehaviour
 
     public void MarioSlowDown()
     {
+        soundSource.PlayOneShot(pipePowerdownSound); // should play sound regardless of size
         mario.velocity = mario.defaultNormalSpeed;
     }
 
@@ -338,7 +345,8 @@ public class LevelManager : MonoBehaviour
 
     public void MarioReachFlagPole() {
         gameOver = true;
-       
+        ChangeMusic(levelCompleteMusic);
+        musicSource.loop = false;
 
         StartCoroutine(enableWithDelay(2f));
     }
@@ -354,4 +362,39 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Couroutine done");
     }
 
+
+    public void ChangeMusic(AudioClip clip, float delay = 0)
+    {
+        StartCoroutine(ChangeMusicCo(clip, delay));
+    }
+
+    public void DisableSounds()
+    {
+        toggle = !toggle;
+        if (toggle)
+        {
+            musicSource.volume = 0;
+            soundSource.volume = 0;
+        }
+        else
+        {
+            musicSource.volume = PlayerPrefs.GetFloat("musicVolume");
+            soundSource.volume = PlayerPrefs.GetFloat("soundVolume");
+        }
+
+    }
+
+    IEnumerator ChangeMusicCo(AudioClip clip, float delay)
+    {
+        Debug.Log(this.name + " ChangeMusicCo: starts changing music to " + clip.name);
+        musicSource.clip = clip;
+        //yield return new WaitWhile(() => gamePaused);
+        yield return new WaitForSecondsRealtime(delay);
+        //yield return new WaitWhile(() => gamePaused || musicPaused);
+        if (!isRespawning)
+        {
+            musicSource.Play();
+        }
+        Debug.Log(this.name + " ChangeMusicCo: done changing music to " + clip.name);
+    }
 }

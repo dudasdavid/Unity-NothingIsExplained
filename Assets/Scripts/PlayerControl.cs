@@ -19,6 +19,9 @@ public class PlayerControl : MonoBehaviour
     public float defaultDoubleJumpVelocity;
     public float defaultJumpVelocityInverted;
     public float defaultDoubleJumpVelocityInverted;
+    public AudioSource soundSource;
+    public AudioClip jumpSmallSound;
+    public AudioClip jumpBigSound;
     public Rigidbody2D rigidBody;
 
     public UnityEvent onDeath;
@@ -43,6 +46,11 @@ public class PlayerControl : MonoBehaviour
     private CameraController camCtrl;
     private LevelManager t_LevelManager;
 
+    public GameObject normalSprite;
+    public GameObject goombaSprite;
+
+    private float pushedTime = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +58,8 @@ public class PlayerControl : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         camCtrl = FindObjectOfType<CameraController>();
         t_LevelManager = FindObjectOfType<LevelManager>();
+
+        
     }
 
     // Update is called once per frame
@@ -90,6 +100,17 @@ public class PlayerControl : MonoBehaviour
             t_LevelManager.MarioRespawn();
         }
 
+        if (Input.GetKey(KeyCode.M))
+        {
+            
+            if (Time.realtimeSinceStartup > pushedTime + 2)
+            {
+                pushedTime = Time.realtimeSinceStartup;
+                t_LevelManager.DisableSounds();
+            }
+            
+        }
+
         if ((rigidBody.position.x > 160) && activateFlag && (t_LevelManager.coins < 10))
         {
             t_LevelManager.OpenGround();
@@ -122,6 +143,7 @@ public class PlayerControl : MonoBehaviour
             jumpCount++;
             if (jumpCount == 1)
             {
+                soundSource.PlayOneShot(jumpSmallSound);
                 if (invertGravity)
                 {
                     velocityVector2D.y = -jumpVelocity;//rigidBody.velocity.y + jumpVelocity;
@@ -134,6 +156,7 @@ public class PlayerControl : MonoBehaviour
             }
             else if (jumpCount == 2 && isDoubleJumpEnabled)
             {
+                soundSource.PlayOneShot(jumpBigSound);
                 if (invertGravity)
                 {
                     velocityVector2D.y = -doubleJumpVelocity;//rigidBody.velocity.y + jumpVelocity;
@@ -279,5 +302,10 @@ public class PlayerControl : MonoBehaviour
 		Tween.Position(transform, transform.position - new Vector3(0, 10, 0), 1, .5f, Tween.EaseInOut, Tween.LoopType.None, null, null, false);
 
 	}
+
+    public void UpdateSpriteRenderer()
+    {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
 
 }
